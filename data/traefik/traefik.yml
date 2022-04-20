@@ -1,0 +1,27 @@
+entryPoints:
+  web:
+    address: ":80"
+  web-secure:
+    address: ":443"
+
+api:
+  dashboard: true
+  insecure: true
+
+providers:
+  file:
+    directory: "/config"
+    watch: true
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    network: "example_default"
+    watch: true
+    exposedByDefault: false
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "me@example.com"
+      storage: "/acme.json"
+      httpChallenge:
+        entryPoint: "web"
